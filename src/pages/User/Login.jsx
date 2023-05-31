@@ -1,49 +1,61 @@
-import React, { useState } from 'react';
-import './Login.scss';
-import Logo from '../../assets/images/Logo.svg';
-import googleIcon from '../../assets/images/google-icon.svg';
-import UsePasswordToggle from './usePasswordToggle';
-import shopImg from '../../assets/images/shoplogoimg.svg';
+import React, { useState, useEffect } from "react";
+import "./Login.scss";
+import Logo from "../../assets/images/Logo.svg";
+import googleIcon from "../../assets/images/google-icon.svg";
+import UsePasswordToggle from "./usePasswordToggle";
+import shopImg from "../../assets/images/shoplogoimg.svg";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../Redux/Features/User/loginSlice';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../Redux/Features/User/loginSlice";
+import { useNavigate } from "react-router-dom";
+import { users } from "../../Redux/Features/chat/allUsersSlice";
+import { setChatingUserchatingUser } from "../../Redux/Features/chat/chatingUserSlice";
 
 //sign in with google
 const handleLogin = () => {
   window.open(
-    'https://ecommerce-tech-titans.herokuapp.com/api/v1/auth/google/callback',
-    '_self',
+    "https://ecommerce-tech-titans.herokuapp.com/api/v1/auth/google/callback",
+    "_self"
   );
 };
 
 const Login = () => {
   const [PasswordInputType, ToggleIcon] = UsePasswordToggle();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const dispatch = useDispatch();
+  const allUsers = useSelector(
+    (state) => state.allUserToChat?.allUsers?.data?.rows
+  );
   const status = useSelector((state) => state.user.status);
   const error = useSelector((state) => state.user.Error);
+  console.log("all users to chat:", allUsers);
+  useEffect(() => {
+    dispatch(users());
+  }, [dispatch]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const logeduser = allUsers.find((item) => item.email == email);
+    localStorage.setItem("chatingUser", JSON.stringify(logeduser));
+    dispatch(setChatingUserchatingUser(logeduser));
     dispatch(login({ email, password }))
       .then((response) => {
-        if (response && response.payload.message === 'Please enter your OTP') {
+        if (response && response.payload.message === "Please enter your OTP") {
           setIsLoggedIn(true);
-          navigate('/verifyotp');
+          navigate("/verifyotp");
         }
-        if (response && response.payload.message === 'Login successful') {
-          localStorage.setItem('email', email);
+        if (response && response.payload.message === "Login successful") {
+          localStorage.setItem("email", email);
           setIsLoggedIn(true);
-          navigate('/');
+          navigate("/");
         } else {
           setIsLoggedIn(false);
         }
       })
-      .catch((error) => console.log('Login error:', error));
+      .catch((error) => console.log("Login error:", error));
   };
 
   return (
@@ -83,12 +95,12 @@ const Login = () => {
               <button type="submit" className="login-btn">
                 Login
               </button>
-              {status === 'loading.....' && (
+              {status === "loading....." && (
                 <div className="process">Loading...</div>
               )}
-              {status === 'failed' && <div className="error">{error}</div>}
-              {status === 'success' && (
-                <div className="success">Product created successfully!</div>
+              {status === "failed" && <div className="error">{error}</div>}
+              {status === "success" && (
+                <div className="success">loged in successfully!</div>
               )}
               <a href="/auth/forgot-password" className="forgetText">
                 Forgot Password ?
@@ -107,7 +119,7 @@ const Login = () => {
               </div>
 
               <p className="account-not">
-                Don't have an account?{' '}
+                Don"t have an account?{" "}
                 <a href="/signup" className="registerText">
                   Register
                 </a>

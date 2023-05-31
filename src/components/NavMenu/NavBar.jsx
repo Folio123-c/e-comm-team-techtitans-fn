@@ -1,5 +1,9 @@
 import Profile from "../../assets/images/profile.jpeg";
+import { useSelector } from "react-redux";
 function NavBar() {
+  const name = useSelector((state) => state.chatingUser?.fullname);
+  const names = JSON.parse(localStorage.getItem("chatingUser"));
+  console.log("full names", names);
   return (
     <div className="navigation">
       <div className="n1">
@@ -17,7 +21,7 @@ function NavBar() {
         <div className="vl"></div>
         <img src={Profile} alt="" />
         <div className="name">
-          <h3 id="currentLogin">Tristan</h3>
+          <h3 id="currentLogin">{names.fullname}</h3>
         </div>
       </div>
     </div>

@@ -41,7 +41,7 @@ function SideBar() {
         </li>
         <li className={activeItem === "chats" ? "active" : ""}>
           <i className="bx bx-comment-dots"></i>
-          <Link to="/users" onClick={() => setActiveItem("chats")}>
+          <Link to="/chat" onClick={() => setActiveItem("chats")}>
             Chats
           </Link>
         </li>

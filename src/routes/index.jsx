@@ -16,6 +16,7 @@ import Dashboard from '../pages/Dashboard/index.jsx';
 import SingleDashboard from '../pages/Dashboard/SingleDashboard.jsx';
 import SellersDashboard from '../pages/Dashboard/SellersDashboard.jsx';
 import ReviewComponent from '../components/Review/ReviewProduct.jsx';
+import Chat from "../pages/chat/index.jsx";
 
 let allRoutes = () => {
   return (
@@ -23,6 +24,7 @@ let allRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/categories" element={<Categories />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/unauthorized" element={<UnauthorizedPage />} />
         <Route element={<Auth allowedRoles={['admin', 'seller']} />} />
         <Route path="/shop" element={<Shop />} />
