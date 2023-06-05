@@ -48,7 +48,7 @@ const EditAccountStatus = ({ id, closeModal }) => {
             onChange={(e) => {
               setAccountStatus(e.target.value);
             }}
-            {...register('status')}
+            {...register("status")}
           >
             <option value="">Select an action</option>
             <option value="active">{statuses[0]}</option>

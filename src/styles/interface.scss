@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: space-between;
   background: $primary-color;
-  padding: 15px 30px;
+  padding: 5px 30px;
   border-bottom: 2px solid $accent;
   position: fixed;
   width: calc(100% - 300px);
@@ -45,8 +45,9 @@
   border-radius: 50%;
   object-fit: cover;
 }
-#interface .navigation .profile .name {
+.name {
   margin-left: 10px;
+  margin-bottom: 30px;
   color: var(--second-color);
   font-size: 13px;
   font-weight: 300;

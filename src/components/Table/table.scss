@@ -31,7 +31,17 @@ td {
   text-align: left;
   border-bottom: 1px solid $accent;
 }
-.active-status {
+.active-status{
+  background-color: $secondary-color;
+  color: white;
+  padding: 2px 1px;
+  left: 5px;
+  border-radius: 17px;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.delivered-status {
   background-color: $secondary-color;
   color: white;
   padding: 2px 1px;
