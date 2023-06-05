@@ -14,6 +14,7 @@ import productsReviewSlice from '../../Redux/Features/Review/ProductReview';
 import singleProductReducer from '../Features/Dashboard/singleProductSlice';
 import productsReducer from '../Features/Dashboard/productsSlice';
 import ProductDetailsReducer from '../Features/Product/EditProductSlice';
+import WishlistSlice from "../../Redux/Features/wishlist/WishlistSlice";
 
 const middleware = [...getDefaultMiddleware(), thunk];
 
@@ -37,6 +38,7 @@ const store = configureStore({
     singleProduct: singleProductReducer,
     products: productsReducer,
     productDetails: ProductDetailsReducer,
+    wishlist: WishlistSlice,
   },
   middleware,
 });
