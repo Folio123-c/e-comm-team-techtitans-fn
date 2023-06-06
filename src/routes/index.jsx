@@ -17,10 +17,12 @@ import SingleDashboard from "../pages/Dashboard/SingleDashboard.jsx";
 import SellersDashboard from "../pages/Dashboard/SellersDashboard.jsx";
 import ReviewComponent from "../components/Review/ReviewProduct.jsx";
 import ListOrder from "../pages/Order";
+import BuyOrder from "../pages/Order/BuyerOrder";
+import OrderDetails from "../pages/Order/OrderDetail";
 
 let allRoutes = () => {
   return (
-   <>
+    <>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/categories" element={<Categories />} />
@@ -43,6 +45,8 @@ let allRoutes = () => {
         <Route path="/review" element={<ReviewComponent />} />
         <Route path="/listusers/:id" element={<ListUser />} />
         <Route path="/listorders" element={<ListOrder />} />
+        <Route path="/orders" element={<BuyOrder />} />
+        <Route path="/order" element={<OrderDetails />} />
       </Routes>
       <ToastContainer />
     </>

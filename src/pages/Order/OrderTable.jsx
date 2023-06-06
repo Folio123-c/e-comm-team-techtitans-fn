@@ -1,13 +1,29 @@
-import { useMemo } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { getAllUsers } from "../../Redux/Features/User/viewUser/view.slice";
+import { useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllSellerOrder } from "../../Redux/Features/Order/sellerOrder.slice";
 import { COLUMNS } from "../../components/Table/orderColumns";
 import Table from "../../components/Table/";
-import Data from "../../components/Table/order.json";
 
 const UserTable = () => {
+  const dispatch = useDispatch();
+  const { orders, status, error } = useSelector((state) => state.orders);
+  useEffect(() => {
+    dispatch(getAllSellerOrder());
+  }, [dispatch]);
   const columns = useMemo(() => COLUMNS, []);
-  const data = Data || [];
+  const data = orders?.data || [];
+
+  console.log("******** data *****", data);
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "failed") {
+    if (error?.message === "Rejected") {
+      return <div>Error: {error.message}</div>;
+    }
+  }
 
   return <Table columns={columns} data={data} />;
 };

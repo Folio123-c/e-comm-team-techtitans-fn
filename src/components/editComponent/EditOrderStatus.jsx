@@ -1,26 +1,35 @@
 import { useState } from "react";
 import "./editModal.scss";
 import { useDispatch } from "react-redux";
-import { addRoles } from "../../Redux/Features/User/viewUser/setRole.slice";
-import { getAllUsers } from "../../Redux/Features/User/viewUser/view.slice";
+import updateOrderStatus from "../../Redux/Features/Order/updateOrderStatus.slice";
+import { getAllSellerOrder } from "../../Redux/Features/Order/sellerOrder.slice";
 import { message } from "antd";
 
-const EditModal = ({ status, id, closeModal }) => {
+const EditModal = ({ orderId, closeModal }) => {
   const dispatch = useDispatch();
 
-  const [updatedStatus, setUpdatedStatus] = useState(status);
+  const [updatedStatus, setUpdatedStatus] = useState('');
 
   const handleStatusChange = (e) => {
     setUpdatedStatus(e.target.value);
   };
 
+  console.log("orderId", orderId);
+  console.log("updatedStatus", updatedStatus);
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      message.success("Order Status updated successfully");
+      await dispatch(
+        updateOrderStatus({
+          status: updatedStatus,
+          id: orderId,
+        })
+      );
+      await dispatch(getAllSellerOrder()); // Fetch all users again
+      message.success("Order updated successfully");
     } catch (error) {
       // Handle error
-      message.error("Failed to update user");
+      message.error("Failed to update order status");
     }
 
     closeModal();

@@ -1,32 +1,32 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import EditStatus from "../editComponent/EditOrderStatus";
 
 export const COLUMNS = [
   {
     Header: "No.",
-    accessor: "id",
+    accessor: "orderId",
     Cell: ({ row }) => row.index + 1,
   },
   {
     Header: "Customer",
-    accessor: "customer",
+    accessor: "customer.name",
   },
   {
     Header: "Email",
-    accessor: "email",
+    accessor: "customer.email",
   },
   {
     Header: "Product",
-    accessor: "product",
+    accessor: "product.name",
   },
   {
     Header: "Quantity",
-    accessor: "quantity",
+    accessor: "orderQuantity",
   },
   {
     Header: "Status",
-    accessor: "status",
+    accessor: "orderStatus",
     Cell: ({ value }) => {
       let statusColor = "";
 
@@ -68,11 +68,12 @@ export const COLUMNS = [
     Header: "Action",
     Cell: ({ row }) => {
       const [showModal, setShowModal] = useState(false);
-      const { status, id } = row.original;
+      const { orderId, orderStatus } = row.original;
       const navigate = useNavigate();
-      const openModal = (id) => {
+      const openModal = (orderId) => {
         setShowModal(true);
       };
+      console.log("******** id *****", orderId);
       const closeModal = () => {
         setShowModal(false);
         navigate(`/listorders`);
@@ -80,9 +81,13 @@ export const COLUMNS = [
 
       return (
         <div className="action">
-          <i className="bx bxs-edit" onClick={() => openModal(id)}></i>
+          <i className="bx bxs-edit" onClick={() => openModal(orderId)}></i>
           {showModal && (
-            <EditStatus id={id} status={status} closeModal={closeModal} />
+            <EditStatus
+              id={orderId}
+              orderStatus={orderStatus}
+              closeModal={closeModal}
+            />
           )}
         </div>
       );

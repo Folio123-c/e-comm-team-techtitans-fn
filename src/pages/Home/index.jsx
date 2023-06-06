@@ -8,7 +8,7 @@ let Home = () => {
     <main>
       <Header />
       <Content />
-      <Footer/>
+      <Footer />
     </main>
   );
 };
