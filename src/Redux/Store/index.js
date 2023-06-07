@@ -14,6 +14,9 @@ import productsReviewSlice from '../../Redux/Features/Review/ProductReview';
 import singleProductReducer from '../Features/Dashboard/singleProductSlice';
 import productsReducer from '../Features/Dashboard/productsSlice';
 import ProductDetailsReducer from '../Features/Product/EditProductSlice';
+import { singleUserReducer } from "../Features/User/getOneUserSlice";
+import addProductToCartSlice from '../Features/Cart/CartSlice';
+
 
 const middleware = [...getDefaultMiddleware(), thunk];
 
@@ -37,6 +40,8 @@ const store = configureStore({
     singleProduct: singleProductReducer,
     products: productsReducer,
     productDetails: ProductDetailsReducer,
+    oneuser: singleUserReducer,
+    cart:addProductToCartSlice,
   },
   middleware,
 });

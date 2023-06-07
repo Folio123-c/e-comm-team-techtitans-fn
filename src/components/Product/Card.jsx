@@ -3,10 +3,21 @@ import { useEffect, useState } from "react";
 import { getProducts } from "../../Redux/Features/Dashboard/productsSlice";
 import "./Product.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import AddToCartProduct from "../../Redux/Features/Cart/CartSlice";
+
+
+ 
 
 const Card = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.products);
+
+ //add to cart
+ const handleAddToCart =() =>{                  
+    // item = {...product, quantity: 1};
+    dispatch(AddToCartProduct({productId, productQuantity: 1}));
+ }
+
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -24,11 +35,16 @@ const Card = () => {
               <p>{product.name}</p>
               <h5>${product.price}</h5>
             </div>
+            
 
             <div className="icon">
               <FavoriteBorderIcon />
             </div>
+            
           </div>
+          <button  onClick={handleAddToCart} type="submit" className="addcart-btn">
+            Add to cart
+              </button>
             </div>
         ))
       ) : (
