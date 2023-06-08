@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Divider from '@mui/material/Divider';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
 
 
 let Header = () => {
